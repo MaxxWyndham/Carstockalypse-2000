@@ -112,8 +112,10 @@ namespace Carstockalypse_2000
 
                             PIX pix = PIX.Load(ms);
 
-                            // if the pix is malformed then we'll shortcircuit here
-                            return pix != null ? pix.Pixies[0].GetBitmap() : new Bitmap(64, 64);
+                            if (pix is null) { return new Bitmap(64, 64); }
+
+                            pix.Pixies[0].Format = PIXIE.PixelmapFormat.C2_16bitAlpha;
+                            return pix.Pixies[0].GetBitmap();
                         }
                     }
 
@@ -136,7 +138,9 @@ namespace Carstockalypse_2000
                                 {
                                     PIX pix = PIX.Load(msTWT);
 
-                                    return pix.Pixies.First(p => string.Compare(p.Name, $"{filename}", true) == 0).GetBitmap();
+                                    PIXIE pixie = pix.Pixies.First(p => string.Compare(p.Name, $"{filename}", true) == 0);
+                                    pixie.Format = PIXIE.PixelmapFormat.C2_16bitAlpha;
+                                    return pixie.GetBitmap();
                                 }
                             }
                         }
@@ -158,7 +162,10 @@ namespace Carstockalypse_2000
                 {
                     PIX pix = PIX.Load(Path.Combine(path, "data", "intrface", "carimage", $"{carName}CI", "pix16", $"{filename}.pix"));
 
-                    return pix != null ? pix.Pixies[0].GetBitmap() : new Bitmap(64, 64);
+                    if (pix is null) { return new Bitmap(64, 64); }
+
+                    pix.Pixies[0].Format = PIXIE.PixelmapFormat.C2_16bitAlpha;
+                    return pix.Pixies[0].GetBitmap();
                 }
 
             }
@@ -170,7 +177,9 @@ namespace Carstockalypse_2000
                 {
                     PIX pix = PIX.Load(ms);
 
-                    return pix.Pixies.First(p => string.Compare(p.Name, $"{filename}", true) == 0).GetBitmap();
+                    PIXIE pixie = pix.Pixies.First(p => string.Compare(p.Name, $"{filename}", true) == 0);
+                    pixie.Format = PIXIE.PixelmapFormat.C2_16bitAlpha;
+                    return pixie.GetBitmap();
                 }
             }
 

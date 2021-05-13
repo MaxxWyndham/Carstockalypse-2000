@@ -343,7 +343,7 @@ namespace Carstockalypse_2000
                         if (archive.Entries.Any(f => f.Name.EndsWith(".c2c", StringComparison.InvariantCultureIgnoreCase)) &&
                             archive.Entries.Any(f => f.FullName.ToLower().StartsWith(@"data/cars/")))
                         {
-                            ZipArchiveEntry entry = archive.Entries.First(f => f.Name.EndsWith(".c2c", StringComparison.InvariantCultureIgnoreCase));
+                            ZipArchiveEntry entry = archive.Entries.First(f => f.Name.EndsWith(".c2c", StringComparison.InvariantCultureIgnoreCase) && f.Name == f.FullName);
 
                             using (MemoryStream ms = new MemoryStream())
                             using (BinaryReader br = new BinaryReader(ms))
